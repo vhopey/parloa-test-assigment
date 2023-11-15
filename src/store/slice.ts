@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { fetchCustomers } from "../../api"
-import { ICustomer } from "./types"
-import { RootState } from "../../app/store"
+import { fetchCustomers } from "../api"
+import { Customer } from "../types"
+import { RootState } from "./store"
 
 export interface CustomersState {
-  data: ICustomer[]
+  data: Customer[]
   isLoading: boolean
   isError: boolean
 }
