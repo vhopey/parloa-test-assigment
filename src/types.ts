@@ -10,9 +10,9 @@ export interface Customer {
 export interface Project {
   id: string
   name: string
-  contact: string
+  contact: string | null
   start_date: string
-  end_date: string
+  end_date: string | null
 }
 
 export enum IndustriesEnum {
