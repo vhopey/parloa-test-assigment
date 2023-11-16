@@ -1,8 +1,9 @@
 import { useEffect } from "react"
 import { Table, Skeleton, Result, Button } from "antd"
+import type { ColumnsType } from "antd/es/table"
 import Editor from "../Editor"
 import DeleteCustomer from "../DeleteCustomer"
-import ViewInformation from "../ViewInformation"
+import ProjectIformation from "../ProjectIformation"
 import { useAppDispatch, useAppSelector } from "../../store/store"
 import {
   fetchCustomersList,
@@ -10,10 +11,25 @@ import {
   selectIsError,
   selectIsLoading,
 } from "../../store/slice"
+import { Customer } from "../../types"
 
 import styles from "./Customers.module.css"
 
-const columns = [
+interface DataSource extends Customer {
+  key: string
+}
+
+const getDataForTable: (data: Customer[]) => DataSource[] = (data) => {
+  const result: DataSource[] = []
+
+  data.forEach((item, index) => {
+    result[index] = { ...item, key: item.id }
+  })
+
+  return result
+}
+
+const columns: ColumnsType<DataSource> = [
   {
     title: "Company",
     dataIndex: "company",
@@ -33,13 +49,14 @@ const columns = [
     title: "Actions",
     dataIndex: "actions",
     key: "actions",
-    render: () => (
-      <div className={styles.actionButtons}>
-        <ViewInformation />
-        <Editor />
-        <DeleteCustomer />
-      </div>
-    ),
+    render: (_, item) => {
+      return (
+        <div className={styles.actionButtons}>
+          <Editor customer={item} />
+          <DeleteCustomer />
+        </div>
+      )
+    },
   },
 ]
 
@@ -72,7 +89,17 @@ function Customers() {
           }
         />
       )}
-      {data.length > 0 && <Table columns={columns} dataSource={data} />}
+      {data.length > 0 && (
+        <Table
+          expandable={{
+            expandedRowRender: ({ projects }) => (
+              <ProjectIformation projects={projects} />
+            ),
+          }}
+          columns={columns}
+          dataSource={getDataForTable(data)}
+        />
+      )}
     </>
   )
 }

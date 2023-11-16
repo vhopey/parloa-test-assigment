@@ -1,8 +1,13 @@
 import { Button, Modal } from "antd"
 import { EditOutlined } from "@ant-design/icons"
 import { useModal } from "../../hooks/useModal"
+import { Customer } from "../../types"
 
-export default function Editor() {
+interface EditorProps {
+  customer: Customer
+}
+
+export default function Editor({ customer }: EditorProps) {
   const { isShow, handleClose, handleShow } = useModal()
   return (
     <>
