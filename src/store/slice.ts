@@ -11,7 +11,7 @@ export interface CustomersState {
 
 const initialState: CustomersState = {
   data: [],
-  isLoading: false,
+  isLoading: true,
   isError: false,
 }
 
@@ -38,10 +38,13 @@ export const customersSlice = createSlice({
       })
       .addCase(fetchCustomersList.rejected, (state) => {
         state.isError = true
+        state.isLoading = false
       })
   },
 })
 
 export const selectCustomers = (state: RootState) => state.customers.data
+export const selectIsLoading = (state: RootState) => state.customers.isLoading
+export const selectIsError = (state: RootState) => state.customers.isError
 
 export default customersSlice.reducer

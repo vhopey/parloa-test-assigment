@@ -1,10 +1,15 @@
 import { useEffect } from "react"
-import { Table } from "antd"
+import { Table, Skeleton, Result, Button } from "antd"
 import Editor from "../Editor"
 import DeleteCustomer from "../DeleteCustomer"
 import ViewInformation from "../ViewInformation"
 import { useAppDispatch, useAppSelector } from "../../store/store"
-import { fetchCustomersList, selectCustomers } from "../../store/slice"
+import {
+  fetchCustomersList,
+  selectCustomers,
+  selectIsError,
+  selectIsLoading,
+} from "../../store/slice"
 
 import styles from "./Customers.module.css"
 
@@ -41,21 +46,34 @@ const columns = [
 function Customers() {
   const dispatch = useAppDispatch()
   const data = useAppSelector(selectCustomers)
+  const isLoading = useAppSelector(selectIsLoading)
+  const isError = useAppSelector(selectIsError)
 
   useEffect(() => {
     dispatch(fetchCustomersList())
   }, [dispatch])
 
+  const onTryAgainClick = () => {
+    window.location.reload()
+  }
+
   return (
-    <div>
-      <Table columns={columns} dataSource={data} />
-      {/* {data.map((item) => (
-        <>
-          <div> {item.id} </div>
-          <Editor />
-        </>
-      ))} */}
-    </div>
+    <>
+      <Skeleton loading={isLoading} active />
+      {isError && (
+        <Result
+          status="error"
+          title="Error"
+          subTitle="Sorry, something went wrong."
+          extra={
+            <Button type="primary" onClick={onTryAgainClick}>
+              Try again
+            </Button>
+          }
+        />
+      )}
+      {data.length > 0 && <Table columns={columns} dataSource={data} />}
+    </>
   )
 }
 
