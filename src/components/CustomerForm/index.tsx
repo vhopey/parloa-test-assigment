@@ -43,8 +43,10 @@ export default function CustomerForm({
         label="Industry"
       >
         <Select>
-          {selectIndustries.map(({ label, value }) => (
-            <Select.Option value={value}>{label}</Select.Option>
+          {selectIndustries.map(({ label, key }) => (
+            <Select.Option key={key} value={key}>
+              {label}
+            </Select.Option>
           ))}
         </Select>
       </Form.Item>

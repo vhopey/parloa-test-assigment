@@ -7,7 +7,7 @@ export interface Customer {
   about: string
 }
 
-export interface RenderCustomer extends Customer {
+export interface TableCustomer extends Customer {
   key: string
 }
 
@@ -25,6 +25,7 @@ export enum IndustriesValuesEnum {
   Tech = "tech",
   Marketing = "marketing",
   Finance = "finance",
+  All = "all",
 }
 
 export enum IndustriesLabelsEnum {
@@ -33,4 +34,22 @@ export enum IndustriesLabelsEnum {
   Tech = "Tech",
   Marketing = "Marketing",
   Finance = "Finance",
+  All = "All",
+}
+
+export enum ActiveOfCustomersValuesEnum {
+  Active = "active",
+  Inactive = "inactive",
+  All = "all",
+}
+
+export enum ActiveOfCustomersLabelsEnum {
+  Active = "Active",
+  Inactive = "Inactive",
+  All = "All",
+}
+
+export type Filters = {
+  type: "active" | "industry"
+  value: ActiveOfCustomersValuesEnum | IndustriesValuesEnum
 }

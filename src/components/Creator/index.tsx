@@ -1,11 +1,14 @@
 import { useState } from "react"
 import { Button, Modal } from "antd"
 import Form from "../CustomerForm"
+import { useAppDispatch } from "../../store/store"
+import { createCustomer } from "../../store/slice"
 import { useModal } from "../../hooks/useModal"
 import { Customer } from "../../types"
 import { emptyCustomer } from "../../constants"
 
 export default function Creator() {
+  const dispatch = useAppDispatch()
   const [customer, setCustomer] = useState(emptyCustomer)
   const { isShow, handleClose, handleShow } = useModal()
 
@@ -14,8 +17,7 @@ export default function Creator() {
   }
 
   const handleCreate = () => {
-    // add action
-    console.log(customer)
+    dispatch(createCustomer(customer))
     handleClose()
   }
 

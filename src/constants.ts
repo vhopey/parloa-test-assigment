@@ -1,4 +1,10 @@
-import { Customer, IndustriesValuesEnum, IndustriesLabelsEnum } from "./types"
+import {
+  Customer,
+  IndustriesValuesEnum,
+  IndustriesLabelsEnum,
+  ActiveOfCustomersValuesEnum,
+  ActiveOfCustomersLabelsEnum,
+} from "./types"
 
 export const emptyCustomer: Customer = {
   id: "",
@@ -12,27 +18,37 @@ export const emptyCustomer: Customer = {
 export const selectIndustries = [
   {
     label: IndustriesLabelsEnum.Finance,
-    value: IndustriesValuesEnum.Finance,
     key: IndustriesValuesEnum.Finance,
   },
   {
     label: IndustriesLabelsEnum.Marketing,
-    value: IndustriesValuesEnum.Marketing,
     key: IndustriesValuesEnum.Marketing,
   },
   {
     label: IndustriesLabelsEnum.Insurance,
-    value: IndustriesValuesEnum.Insurance,
     key: IndustriesValuesEnum.Insurance,
   },
   {
     label: IndustriesLabelsEnum.Travel,
-    value: IndustriesValuesEnum.Travel,
     key: IndustriesValuesEnum.Travel,
   },
   {
     label: IndustriesLabelsEnum.Tech,
-    value: IndustriesValuesEnum.Tech,
     key: IndustriesValuesEnum.Tech,
+  },
+]
+
+export const selectActiveOfCustomers = [
+  {
+    label: ActiveOfCustomersLabelsEnum.Active,
+    key: ActiveOfCustomersValuesEnum.Active,
+  },
+  {
+    label: ActiveOfCustomersLabelsEnum.Inactive,
+    key: ActiveOfCustomersValuesEnum.Inactive,
+  },
+  {
+    label: ActiveOfCustomersLabelsEnum.All,
+    key: ActiveOfCustomersValuesEnum.All,
   },
 ]

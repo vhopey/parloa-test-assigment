@@ -1,11 +1,14 @@
 import { Button, Modal } from "antd"
 import { DeleteOutlined, ExclamationCircleFilled } from "@ant-design/icons"
+import { useAppDispatch } from "../../store/store"
+import { deleteCustomer } from "../../store/slice"
 
 const { confirm } = Modal
 
-export default function DeleteCustomer() {
+export default function DeleteCustomer({ id }: { id: string }) {
+  const dispatch = useAppDispatch()
   const handleDelete = () => {
-    // delete action
+    dispatch(deleteCustomer(id))
   }
 
   const showDeleteConfirm = () => {

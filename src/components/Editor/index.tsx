@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Button, Modal } from "antd"
 import { EditOutlined } from "@ant-design/icons"
+import { useAppDispatch } from "../../store/store"
+import { editCustomer } from "../../store/slice"
 import Form from "../CustomerForm"
 import { useModal } from "../../hooks/useModal"
 import { Customer } from "../../types"
@@ -10,8 +12,8 @@ interface EditorProps {
 }
 
 export default function Editor({ customer }: EditorProps) {
+  const dispatch = useAppDispatch()
   const [customerValue, setCustomerValue] = useState(customer)
-
   const { isShow, handleClose, handleShow } = useModal()
 
   const handleChangeCustomer = (data: Customer) => {
@@ -19,8 +21,7 @@ export default function Editor({ customer }: EditorProps) {
   }
 
   const handleEdit = () => {
-    // add action
-    console.log(customerValue)
+    dispatch(editCustomer(customerValue))
     handleClose()
   }
 

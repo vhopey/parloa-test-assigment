@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { Table, Skeleton, Result, Button } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import Editor from "../Editor"
@@ -11,11 +11,12 @@ import {
   selectIsError,
   selectIsLoading,
 } from "../../store/slice"
-import { RenderCustomer } from "../../types"
+import { TableCustomer } from "../../types"
+import { getDataWithKeys } from "../../helpers"
 
 import styles from "./Customers.module.css"
 
-const columns: ColumnsType<RenderCustomer> = [
+const columns: ColumnsType<TableCustomer> = [
   {
     title: "Company",
     dataIndex: "company",
@@ -39,7 +40,7 @@ const columns: ColumnsType<RenderCustomer> = [
       return (
         <div className={styles.actionButtons}>
           <Editor customer={item} />
-          <DeleteCustomer />
+          {!item.isActive && <DeleteCustomer id={item.id} />}
         </div>
       )
     },
@@ -59,6 +60,8 @@ function Customers() {
   const onTryAgainClick = () => {
     window.location.reload()
   }
+
+  const dataForTable = useMemo(() => getDataWithKeys(data), [data])
 
   return (
     <>
@@ -83,7 +86,7 @@ function Customers() {
             ),
           }}
           columns={columns}
-          dataSource={data}
+          dataSource={dataForTable}
         />
       )}
     </>
