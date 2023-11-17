@@ -1,6 +1,6 @@
 import { FormEvent } from "react"
-import { Button, Checkbox, Form, Input, Select } from "antd"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { Checkbox, Form, Input, Select } from "antd"
+import ProjectsForm from "./ProjectsForm"
 import { Customer } from "../../types"
 import { selectIndustries } from "../../constants"
 
@@ -14,6 +14,7 @@ export default function CustomerForm({
   onChangeCustomer,
 }: CustomerFormProps) {
   const handleChange = (data: FormEvent) => {
+    console.log(data)
     onChangeCustomer({
       ...customer,
       ...data,
@@ -54,9 +55,7 @@ export default function CustomerForm({
         <Input.TextArea />
       </Form.Item>
       <Form.Item label="Projects">
-        <Button type="default">
-          <PlusCircleOutlined />
-        </Button>
+        <ProjectsForm projects={customer.projects} />
       </Form.Item>
     </Form>
   )
