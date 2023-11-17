@@ -36,6 +36,10 @@ export const selectIndustries = [
     label: IndustriesLabelsEnum.Tech,
     key: IndustriesValuesEnum.Tech,
   },
+  {
+    label: IndustriesLabelsEnum.All,
+    key: IndustriesValuesEnum.All,
+  },
 ]
 
 export const selectActiveOfCustomers = [

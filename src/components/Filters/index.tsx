@@ -3,6 +3,7 @@ import type { MenuProps } from "antd"
 import { useAppDispatch } from "../../store/store"
 import { resetFilter, filteringData } from "../../store/slice"
 import { selectIndustries, selectActiveOfCustomers } from "../../constants"
+import { ActiveOfCustomersValuesEnum, IndustriesValuesEnum } from "../../types"
 
 import styles from "./Filters.module.css"
 
@@ -13,7 +14,7 @@ export default function Filters() {
   const dispatch = useAppDispatch()
 
   const handleClickIndustry = (event: any) => {
-    dispatch(filteringData({ type: "industry", value: event.key }))
+    dispatch(filteringData({ industry: event.key }))
   }
 
   const handleClickReset = () => {
@@ -21,16 +22,20 @@ export default function Filters() {
   }
 
   const handleClickActive = (event: any) => {
-    dispatch(filteringData({ type: "active", value: event.key }))
+    dispatch(filteringData({ isActive: event.key }))
   }
 
   const industryMenuProps = {
     items: industryItems,
+    selectable: true,
+    defaultSelectedKeys: [IndustriesValuesEnum.All],
     onClick: handleClickIndustry,
   }
 
   const activeMenuProps = {
     items: activeItems,
+    selectable: true,
+    defaultSelectedKeys: [ActiveOfCustomersValuesEnum.All],
     onClick: handleClickActive,
   }
 

@@ -10,6 +10,7 @@ import {
   selectCustomers,
   selectIsError,
   selectIsLoading,
+  selectFilteringCustomers,
 } from "../../store/slice"
 import { TableCustomer } from "../../types"
 import { getDataWithKeys } from "../../helpers"
@@ -50,6 +51,7 @@ const columns: ColumnsType<TableCustomer> = [
 function Customers() {
   const dispatch = useAppDispatch()
   const data = useAppSelector(selectCustomers)
+  const filteringData = useAppSelector(selectFilteringCustomers)
   const isLoading = useAppSelector(selectIsLoading)
   const isError = useAppSelector(selectIsError)
 
@@ -61,7 +63,13 @@ function Customers() {
     window.location.reload()
   }
 
-  const dataForTable = useMemo(() => getDataWithKeys(data), [data])
+  const dataForTable = useMemo(
+    () =>
+      filteringData.length > 0
+        ? getDataWithKeys(filteringData)
+        : getDataWithKeys(data),
+    [filteringData, data],
+  )
 
   return (
     <>

@@ -1,20 +1,30 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { v4 as uuidv4 } from "uuid"
 import { fetchCustomers } from "../api"
-import { Customer, Filters } from "../types"
+import {
+  Customer,
+  Filters,
+  ActiveOfCustomersValuesEnum,
+  IndustriesValuesEnum,
+} from "../types"
 import { RootState } from "./store"
+import { filterData } from "../helpers"
 
 export interface CustomersState {
   data: Customer[]
-  filters: Filters[]
+  filters: Filters
   filteringData: Customer[]
   isLoading: boolean
   isError: boolean
 }
 
+const filtersInitialState = {
+  isActive: ActiveOfCustomersValuesEnum.All,
+  industry: IndustriesValuesEnum.All,
+}
 const initialState: CustomersState = {
   data: [],
-  filters: [],
+  filters: filtersInitialState,
   filteringData: [],
   isLoading: true,
   isError: false,
@@ -38,31 +48,41 @@ export const customersSlice = createSlice({
   reducers: {
     createCustomer(state, action) {
       state.data = [{ ...action.payload, id: uuidv4() }, ...state.data]
+
+      if (state.filteringData.length > 0) {
+        state.filteringData = filterData([...state.data], { ...state.filters })
+      }
     },
     editCustomer(state, action) {
       const index = state.data.findIndex((item) => {
         return item.id === action.payload.id
       })
       state.data.splice(index, 1, action.payload)
+
+      if (state.filteringData.length > 0) {
+        state.filteringData = filterData([...state.data], { ...state.filters })
+      }
     },
     deleteCustomer(state, action) {
       const index = state.data.findIndex((item) => {
         return item.id === action.payload
       })
       state.data.splice(index, 1)
+
+      if (state.filteringData.length > 0) {
+        state.filteringData = filterData([...state.data], { ...state.filters })
+      }
     },
     filteringData(state, { payload }) {
-      const filterIndex = state.filters.findIndex((item) => {
-        return item.type === payload.type && item.value === payload.value
-      })
-      if (filterIndex) {
-        state.filters.splice(filterIndex, 1, payload)
+      state.filters = {
+        ...state.filters,
+        ...payload,
       }
 
-      state.filteringData = []
+      state.filteringData = filterData([...state.data], { ...state.filters })
     },
     resetFilter(state) {
-      state.filters = []
+      state.filters = filtersInitialState
       state.filteringData = []
     },
   },

@@ -50,6 +50,6 @@ export enum ActiveOfCustomersLabelsEnum {
 }
 
 export type Filters = {
-  type: "active" | "industry"
-  value: ActiveOfCustomersValuesEnum | IndustriesValuesEnum
+  isActive: ActiveOfCustomersValuesEnum
+  industry: IndustriesValuesEnum
 }
