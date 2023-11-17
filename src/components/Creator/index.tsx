@@ -1,8 +1,24 @@
+import { useState } from "react"
 import { Button, Modal } from "antd"
+import Form from "../CustomerForm"
 import { useModal } from "../../hooks/useModal"
+import { Customer } from "../../types"
+import { emptyCustomer } from "../../constants"
 
 export default function Creator() {
+  const [customer, setCustomer] = useState(emptyCustomer)
   const { isShow, handleClose, handleShow } = useModal()
+
+  const handleChange = (data: Customer) => {
+    setCustomer(data)
+  }
+
+  const handleCreate = () => {
+    // add action
+    console.log(customer)
+    handleClose()
+  }
+
   return (
     <>
       <Button type="primary" onClick={handleShow}>
@@ -11,10 +27,10 @@ export default function Creator() {
       <Modal
         title="Create a new customer"
         open={isShow}
-        onOk={() => {}}
+        onOk={handleCreate}
         onCancel={handleClose}
       >
-        <p>Some contents...</p>
+        <Form customer={customer} onChangeCustomer={handleChange} />
       </Modal>
     </>
   )

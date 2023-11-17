@@ -11,25 +11,11 @@ import {
   selectIsError,
   selectIsLoading,
 } from "../../store/slice"
-import { Customer } from "../../types"
+import { RenderCustomer } from "../../types"
 
 import styles from "./Customers.module.css"
 
-interface DataSource extends Customer {
-  key: string
-}
-
-const getDataForTable: (data: Customer[]) => DataSource[] = (data) => {
-  const result: DataSource[] = []
-
-  data.forEach((item, index) => {
-    result[index] = { ...item, key: item.id }
-  })
-
-  return result
-}
-
-const columns: ColumnsType<DataSource> = [
+const columns: ColumnsType<RenderCustomer> = [
   {
     title: "Company",
     dataIndex: "company",
@@ -97,7 +83,7 @@ function Customers() {
             ),
           }}
           columns={columns}
-          dataSource={getDataForTable(data)}
+          dataSource={data}
         />
       )}
     </>

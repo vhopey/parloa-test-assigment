@@ -7,6 +7,10 @@ export interface Customer {
   about: string
 }
 
+export interface RenderCustomer extends Customer {
+  key: string
+}
+
 export interface Project {
   id: string
   name: string
@@ -15,10 +19,18 @@ export interface Project {
   end_date: string | null
 }
 
-export enum IndustriesEnum {
+export enum IndustriesValuesEnum {
   Insurance = "insurance",
   Travel = "travel",
   Tech = "tech",
   Marketing = "marketing",
   Finance = "finance",
+}
+
+export enum IndustriesLabelsEnum {
+  Insurance = "Insurance",
+  Travel = "Travel",
+  Tech = "Tech",
+  Marketing = "Marketing",
+  Finance = "Finance",
 }

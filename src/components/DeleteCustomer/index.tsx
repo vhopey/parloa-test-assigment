@@ -4,6 +4,10 @@ import { DeleteOutlined, ExclamationCircleFilled } from "@ant-design/icons"
 const { confirm } = Modal
 
 export default function DeleteCustomer() {
+  const handleDelete = () => {
+    // delete action
+  }
+
   const showDeleteConfirm = () => {
     confirm({
       title: "Are you sure delete this customer?",
@@ -11,12 +15,7 @@ export default function DeleteCustomer() {
       okText: "Delete",
       okType: "danger",
       cancelText: "Cancel",
-      onOk() {
-        console.log("OK")
-      },
-      onCancel() {
-        console.log("Cancel")
-      },
+      onOk: handleDelete,
     })
   }
 

@@ -1,34 +1,26 @@
 import { Button, Dropdown } from "antd"
 import type { MenuProps } from "antd"
-import { IndustriesEnum } from "../../types"
+import { selectIndustries } from "../../constants"
 
-const items: MenuProps["items"] = [
-  {
-    key: 1,
-    label: IndustriesEnum.Finance,
-  },
-  {
-    key: 2,
-    label: IndustriesEnum.Insurance,
-  },
-  {
-    key: 3,
-    label: IndustriesEnum.Marketing,
-  },
-  {
-    key: 4,
-    label: IndustriesEnum.Tech,
-  },
-  {
-    key: 5,
-    label: IndustriesEnum.Travel,
-  },
-]
+import styles from "./Filters.module.css"
+
+const items: MenuProps["items"] = selectIndustries
 
 export default function Filters() {
+  const handleClickFilter = () => {
+    // filter action
+  }
+
+  const handleClickReset = () => {
+    // reset filter action
+  }
+
   return (
-    <Dropdown menu={{ items }} placement="bottom">
-      <Button>Industry</Button>
-    </Dropdown>
+    <div className={styles.wrapper}>
+      <Dropdown menu={{ items }} placement="bottom">
+        <Button onClick={handleClickFilter}>Industries</Button>
+      </Dropdown>
+      <Button onClick={handleClickReset}>Reset filter</Button>
+    </div>
   )
 }
