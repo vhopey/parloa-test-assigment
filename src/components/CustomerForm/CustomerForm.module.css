@@ -1,0 +1,14 @@
+.dateWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.minusIcon {
+  margin-bottom: 24px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 16px;
+}

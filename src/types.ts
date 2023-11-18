@@ -1,3 +1,5 @@
+import type { Dayjs } from "dayjs"
+
 export interface Customer {
   id: string
   isActive: boolean
@@ -17,6 +19,12 @@ export interface Project {
   contact: string | null
   start_date: string
   end_date: string | null
+}
+
+export interface ProjectsWithDayJS
+  extends Pick<Project, "id" | "name" | "contact"> {
+  start_date: Dayjs
+  end_date: Dayjs | null
 }
 
 export enum IndustriesValuesEnum {

@@ -1,11 +1,12 @@
 import { useState } from "react"
-import { Button, Modal } from "antd"
+import { Button, Modal, Form } from "antd"
 import { EditOutlined } from "@ant-design/icons"
 import { useAppDispatch } from "../../store/store"
 import { editCustomer } from "../../store/slice"
-import Form from "../CustomerForm"
+import CustomerForm from "../CustomerForm"
 import { useModal } from "../../hooks/useModal"
 import { Customer } from "../../types"
+import { normalizeProjectsData, checkErrors } from "../../helpers"
 
 interface EditorProps {
   customer: Customer
@@ -13,16 +14,26 @@ interface EditorProps {
 
 export default function Editor({ customer }: EditorProps) {
   const dispatch = useAppDispatch()
-  const [customerValue, setCustomerValue] = useState(customer)
+  const [errorMessage, setErrorMessage] = useState("")
+  const [form] = Form.useForm()
   const { isShow, handleClose, handleShow } = useModal()
 
-  const handleChangeCustomer = (data: Customer) => {
-    setCustomerValue(data)
-  }
-
   const handleEdit = () => {
-    dispatch(editCustomer(customerValue))
-    handleClose()
+    const formData = form.getFieldsValue()
+
+    if (checkErrors(formData)) {
+      setErrorMessage("Fill in required fields")
+    } else {
+      dispatch(
+        editCustomer({
+          ...customer,
+          ...formData,
+          projects: normalizeProjectsData(formData.projects),
+        }),
+      )
+      handleClose()
+      setErrorMessage("")
+    }
   }
 
   return (
@@ -38,10 +49,12 @@ export default function Editor({ customer }: EditorProps) {
         open={isShow}
         onOk={handleEdit}
         onCancel={handleClose}
+        width="700px"
       >
-        <Form
-          customer={customerValue}
-          onChangeCustomer={handleChangeCustomer}
+        <CustomerForm
+          customer={customer}
+          form={form}
+          errorMessage={errorMessage}
         />
       </Modal>
     </>

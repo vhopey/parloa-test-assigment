@@ -1,22 +1,54 @@
+import { Fragment } from "react"
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
-import { Button, Form, Input, Space } from "antd"
-import { Project } from "../../types"
+import { Button, Form, Input, DatePicker } from "antd"
+import { ProjectsWithDayJS } from "../../types"
 
-export default function ProjectsForm({ projects }: { projects: Project[] }) {
+import styles from "./CustomerForm.module.css"
+
+export default function ProjectsForm({
+  projects,
+}: {
+  projects: ProjectsWithDayJS[]
+}) {
   return (
-    <Form.List name="projects">
+    <Form.List name="projects" initialValue={projects}>
       {(fields, { add, remove }) => (
         <>
           {fields.map(({ key, name, ...restField }) => (
-            <Space key={key}>
-              <Form.Item name={[name, "name"]} {...restField}>
-                <Input placeholder="Name of project" />
+            <Fragment key={key}>
+              <Form.Item
+                label="Name"
+                name={[name, "name"]}
+                required={true}
+                {...restField}
+              >
+                <Input />
               </Form.Item>
-              <Form.Item name={[name, "contact"]} {...restField}>
-                <Input placeholder="Contact email" />
+              <Form.Item
+                label="Contact"
+                name={[name, "contact"]}
+                required={true}
+                {...restField}
+              >
+                <Input placeholder="qwerty@gmail.com" />
               </Form.Item>
-              <MinusCircleOutlined onClick={() => remove(name)} />
-            </Space>
+              <div className={styles.dateWrapper}>
+                <Form.Item
+                  name={[name, "start_date"]}
+                  required={true}
+                  {...restField}
+                >
+                  <DatePicker placeholder="Start date (required)" />
+                </Form.Item>
+                <Form.Item name={[name, "end_date"]} {...restField}>
+                  <DatePicker placeholder="End date" />
+                </Form.Item>
+                <MinusCircleOutlined
+                  className={styles.minusIcon}
+                  onClick={() => remove(name)}
+                />
+              </div>
+            </Fragment>
           ))}
           <Form.Item>
             <Button

@@ -1,47 +1,51 @@
-import { FormEvent } from "react"
-import { Checkbox, Form, Input, Select } from "antd"
+import { Checkbox, Form, Input, Select, FormInstance } from "antd"
 import ProjectsForm from "./ProjectsForm"
 import { Customer } from "../../types"
 import { selectIndustries } from "../../constants"
+import { formatDateInProjectsToDatePicker } from "../../helpers"
+
+import styles from "./CustomerForm.module.css"
 
 interface CustomerFormProps {
   customer: Customer
-  onChangeCustomer: (data: Customer) => void
+  form: FormInstance<any>
+  errorMessage: string
 }
 
 export default function CustomerForm({
   customer,
-  onChangeCustomer,
+  form,
+  errorMessage,
 }: CustomerFormProps) {
-  const handleChange = (data: FormEvent) => {
-    console.log(data)
-    onChangeCustomer({
-      ...customer,
-      ...data,
-    })
-  }
+  const formattedProjects = formatDateInProjectsToDatePicker(customer.projects)
 
   return (
     <Form
       labelCol={{ span: 10 }}
       wrapperCol={{ span: 25 }}
       layout="vertical"
-      onValuesChange={handleChange}
+      form={form}
     >
       <Form.Item
         valuePropName="checked"
-        initialValue={customer.isActive ? "checked" : undefined}
+        initialValue={customer.isActive ? "checked" : false}
         name="isActive"
       >
         <Checkbox>Active customer</Checkbox>
       </Form.Item>
-      <Form.Item initialValue={customer.company} label="Company" name="company">
+      <Form.Item
+        initialValue={customer.company}
+        label="Company"
+        name="company"
+        rules={[{ required: true, message: "Missing company" }]}
+      >
         <Input />
       </Form.Item>
       <Form.Item
         initialValue={customer.industry}
         name="industry"
         label="Industry"
+        rules={[{ required: true, message: "Missing industry" }]}
       >
         <Select>
           {selectIndustries.map(({ label, key }) => (
@@ -54,9 +58,8 @@ export default function CustomerForm({
       <Form.Item initialValue={customer.about} label="About" name="about">
         <Input.TextArea />
       </Form.Item>
-      <Form.Item label="Projects">
-        <ProjectsForm projects={customer.projects} />
-      </Form.Item>
+      <ProjectsForm projects={formattedProjects} />
+      <span className={styles.errorMessage}>{errorMessage}</span>
     </Form>
   )
 }

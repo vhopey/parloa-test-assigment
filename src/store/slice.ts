@@ -47,7 +47,7 @@ export const customersSlice = createSlice({
   initialState,
   reducers: {
     createCustomer(state, action) {
-      state.data = [{ ...action.payload, id: uuidv4() }, ...state.data]
+      state.data = [action.payload, ...state.data]
 
       if (state.filteringData.length > 0) {
         state.filteringData = filterData([...state.data], { ...state.filters })
