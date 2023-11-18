@@ -1,6 +1,6 @@
 import { Fragment } from "react"
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
 import { Button, Form, Input, DatePicker } from "antd"
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
 import { ProjectsWithDayJS } from "../../types"
 
 import styles from "./CustomerForm.module.css"

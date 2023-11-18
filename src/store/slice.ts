@@ -1,14 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { v4 as uuidv4 } from "uuid"
 import { fetchCustomers } from "../api"
+import { RootState } from "./store"
+import { filterData } from "../helpers"
 import {
   Customer,
   Filters,
   ActiveOfCustomersValuesEnum,
   IndustriesValuesEnum,
 } from "../types"
-import { RootState } from "./store"
-import { filterData } from "../helpers"
 
 export interface CustomersState {
   data: Customer[]
@@ -22,6 +21,7 @@ const filtersInitialState = {
   isActive: ActiveOfCustomersValuesEnum.All,
   industry: IndustriesValuesEnum.All,
 }
+
 const initialState: CustomersState = {
   data: [],
   filters: filtersInitialState,

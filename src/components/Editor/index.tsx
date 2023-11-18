@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { Button, Modal, Form } from "antd"
 import { EditOutlined } from "@ant-design/icons"
+import CustomerForm from "../CustomerForm"
 import { useAppDispatch } from "../../store/store"
 import { editCustomer } from "../../store/slice"
-import CustomerForm from "../CustomerForm"
 import { useModal } from "../../hooks/useModal"
-import { Customer } from "../../types"
 import { normalizeProjectsData, checkErrors } from "../../helpers"
+import { Customer } from "../../types"
 
 interface EditorProps {
   customer: Customer

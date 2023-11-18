@@ -1,8 +1,8 @@
 import { Checkbox, Form, Input, Select, FormInstance } from "antd"
 import ProjectsForm from "./ProjectsForm"
-import { Customer } from "../../types"
 import { selectIndustries } from "../../constants"
 import { formatDateInProjectsToDatePicker } from "../../helpers"
+import { Customer } from "../../types"
 
 import styles from "./CustomerForm.module.css"
 
@@ -20,15 +20,10 @@ export default function CustomerForm({
   const formattedProjects = formatDateInProjectsToDatePicker(customer.projects)
 
   return (
-    <Form
-      labelCol={{ span: 10 }}
-      wrapperCol={{ span: 25 }}
-      layout="vertical"
-      form={form}
-    >
+    <Form layout="vertical" form={form}>
       <Form.Item
         valuePropName="checked"
-        initialValue={customer.isActive ? "checked" : false}
+        initialValue={customer.isActive ? true : false}
         name="isActive"
       >
         <Checkbox>Active customer</Checkbox>

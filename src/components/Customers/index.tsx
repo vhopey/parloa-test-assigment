@@ -12,8 +12,8 @@ import {
   selectIsLoading,
   selectFilteringCustomers,
 } from "../../store/slice"
-import { TableCustomer } from "../../types"
 import { getDataWithKeys } from "../../helpers"
+import { TableCustomer } from "../../types"
 
 import styles from "./Customers.module.css"
 

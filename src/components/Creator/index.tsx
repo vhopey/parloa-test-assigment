@@ -1,12 +1,12 @@
-import { Button, Modal, Form } from "antd"
+import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
+import { Button, Modal, Form } from "antd"
 import CustomerForm from "../CustomerForm"
 import { useAppDispatch } from "../../store/store"
 import { createCustomer } from "../../store/slice"
 import { useModal } from "../../hooks/useModal"
 import { emptyCustomer } from "../../constants"
 import { normalizeProjectsData, checkErrors } from "../../helpers"
-import { useState } from "react"
 
 export default function Creator() {
   const dispatch = useAppDispatch()

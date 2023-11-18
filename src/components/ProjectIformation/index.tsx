@@ -13,7 +13,7 @@ export default function ProjectIformation({
   if (projects.length < 0) {
     return null
   }
-  // view date in correct form
+
   return (
     <div className={styles.wrapper}>
       <span className={styles.title}> Projects: </span>
