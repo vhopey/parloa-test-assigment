@@ -1,7 +1,7 @@
 import { Checkbox, Form, Input, Select, FormInstance } from "antd"
 import ProjectsForm from "./ProjectsForm"
 import { selectIndustries } from "../../constants"
-import { formatDateInProjectsToDatePicker } from "../../helpers"
+import { formatDateInProjectsToDatePicker } from "../../utils"
 import { Customer } from "../../types"
 
 import styles from "./CustomerForm.module.css"
@@ -20,13 +20,13 @@ export default function CustomerForm({
   const formattedProjects = formatDateInProjectsToDatePicker(customer.projects)
 
   return (
-    <Form layout="vertical" form={form}>
+    <Form layout="vertical" form={form} data-testid="customers-form">
       <Form.Item
         valuePropName="checked"
         initialValue={customer.isActive ? true : false}
         name="isActive"
       >
-        <Checkbox>Active customer</Checkbox>
+        <Checkbox data-testid="active-field">Active customer</Checkbox>
       </Form.Item>
       <Form.Item
         initialValue={customer.company}
@@ -34,7 +34,7 @@ export default function CustomerForm({
         name="company"
         rules={[{ required: true, message: "Missing company" }]}
       >
-        <Input />
+        <Input data-testid="company-field" />
       </Form.Item>
       <Form.Item
         initialValue={customer.industry}
@@ -42,7 +42,7 @@ export default function CustomerForm({
         label="Industry"
         rules={[{ required: true, message: "Missing industry" }]}
       >
-        <Select>
+        <Select data-testid="industry-field">
           {selectIndustries.map(({ label, key }) => (
             <Select.Option key={key} value={key}>
               {label}
@@ -51,7 +51,7 @@ export default function CustomerForm({
         </Select>
       </Form.Item>
       <Form.Item initialValue={customer.about} label="About" name="about">
-        <Input.TextArea />
+        <Input.TextArea data-testid="about-field" />
       </Form.Item>
       <ProjectsForm projects={formattedProjects} />
       <span className={styles.errorMessage}>{errorMessage}</span>

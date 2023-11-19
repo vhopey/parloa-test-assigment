@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { fetchCustomers } from "../api"
 import { RootState } from "./store"
-import { filterData } from "../helpers"
+import { filterData } from "../utils"
 import {
   Customer,
   Filters,

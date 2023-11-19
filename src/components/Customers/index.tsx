@@ -12,7 +12,7 @@ import {
   selectIsLoading,
   selectFilteringCustomers,
 } from "../../store/slice"
-import { getDataWithKeys } from "../../helpers"
+import { getDataWithKeys } from "../../utils"
 import { TableCustomer } from "../../types"
 
 import styles from "./Customers.module.css"
@@ -88,6 +88,7 @@ function Customers() {
       )}
       {data.length > 0 && (
         <Table
+          data-testid="customers-list"
           expandable={{
             expandedRowRender: ({ projects }) => (
               <ProjectIformation projects={projects} />

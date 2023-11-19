@@ -5,7 +5,7 @@ import CustomerForm from "../CustomerForm"
 import { useAppDispatch } from "../../store/store"
 import { editCustomer } from "../../store/slice"
 import { useModal } from "../../hooks/useModal"
-import { normalizeProjectsData, checkErrors } from "../../helpers"
+import { normalizeProjectsData, checkErrors } from "../../utils"
 import { Customer } from "../../types"
 
 interface EditorProps {
@@ -43,6 +43,7 @@ export default function Editor({ customer }: EditorProps) {
         shape="circle"
         onClick={handleShow}
         icon={<EditOutlined />}
+        data-testid="edit-icon-button"
       />
       <Modal
         title="Edit a customer"

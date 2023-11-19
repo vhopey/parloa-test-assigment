@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../store/store"
 import { createCustomer } from "../../store/slice"
 import { useModal } from "../../hooks/useModal"
 import { emptyCustomer } from "../../constants"
-import { normalizeProjectsData, checkErrors } from "../../helpers"
+import { normalizeProjectsData, checkErrors } from "../../utils"
 
 export default function Creator() {
   const dispatch = useAppDispatch()
@@ -35,7 +35,7 @@ export default function Creator() {
 
   return (
     <>
-      <Button type="primary" onClick={handleShow}>
+      <Button type="primary" onClick={handleShow} data-testid="create-button">
         Create a new customer
       </Button>
       <Modal
@@ -44,6 +44,7 @@ export default function Creator() {
         onOk={handleCreate}
         onCancel={handleClose}
         width="700px"
+        data-testid="create-modal"
       >
         <CustomerForm
           form={form}
