@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "test": "vitest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",

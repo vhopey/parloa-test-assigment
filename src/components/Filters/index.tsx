@@ -40,7 +40,7 @@ export default function Filters() {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="filters-container">
       <Dropdown menu={activeMenuProps} placement="bottom">
         <Button>Active of customers</Button>
       </Dropdown>

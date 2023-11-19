@@ -29,6 +29,7 @@ export default function DeleteCustomer({ id }: { id: string }) {
         shape="circle"
         onClick={showDeleteConfirm}
         icon={<DeleteOutlined />}
+        data-testid="delete-icon-button"
       />
     </>
   )

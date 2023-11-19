@@ -15,7 +15,7 @@ export default function ProjectIformation({
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="projects-iformation-block">
       <span className={styles.title}> Projects: </span>
       <List
         itemLayout="horizontal"

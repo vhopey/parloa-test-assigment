@@ -23,7 +23,7 @@ const contentStyle: React.CSSProperties = {
 
 function App() {
   return (
-    <Layout>
+    <Layout data-testid="app-layout">
       <Header style={headerStyle}>Parloa test assigment</Header>
       <Content style={contentStyle}>
         <div className={styles.panel}>
