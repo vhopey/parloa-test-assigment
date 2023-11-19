@@ -1,20 +1,25 @@
 # Parloa test assigment
 
 ## Start project
+
 You need to install dependencies and start dev server for working with this project:
+
 ```
   npm i
   npm run dev
 ```
 
 ## All scripts
+
 - `dev` - start dev server and open browser
 - `build` - build for production
+- `test` - launch test runner
 - `format` - prettier auto fix
 - `lint` - eslint check
 - `type-check` - typescript check
 
 ## Technologies
+
 - TypeScript
 - React
 - Redux-toolkit
@@ -22,4 +27,4 @@ You need to install dependencies and start dev server for working with this proj
 - React testing library
 - Ant Design
 
-[Used official template Redux+TS for Vite](https://github.com/reduxjs/redux-templates/tree/master/packages/vite-template-redux) 
+[Used official template Redux+TS for Vite](https://github.com/reduxjs/redux-templates/tree/master/packages/vite-template-redux)
