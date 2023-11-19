@@ -38,5 +38,7 @@ export const customerList = [
     ...customer,
     id: "1928e668-8eb3-424f-8af7-6e6da2515b15",
     company: "Kessler",
+    industry: "tech",
+    isActive: false,
   },
 ]
