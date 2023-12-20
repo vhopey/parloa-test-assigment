@@ -9,7 +9,7 @@ You need to install dependencies and start dev server for working with this proj
   npm run dev
 ```
 
-## All scripts
+## All scripts:
 
 - `dev` - start dev server and open browser
 - `build` - build for production
@@ -18,7 +18,7 @@ You need to install dependencies and start dev server for working with this proj
 - `lint` - eslint check
 - `type-check` - typescript check
 
-## Technologies
+## Technologies:
 
 - TypeScript
 - React
